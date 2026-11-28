@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2F7F1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Plate Log">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>🥗 Daily Plate Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>🥗 Daily Plate Log</h1>
+      <p class="lede">Log what you eat, add photos to each meal, and save the day as a PDF.</p>
+    </div>
+    <div class="tools">
+      <button id="installBtn" type="button" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M12 8v6"/><path d="M9.5 11.5L12 14l2.5-2.5"/></svg>
+        Install app
+      </button>
+      <button class="primary" id="pdfBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg>
+        Download PDF
+      </button>
+    </div>
+  </header>
+
+  <nav class="views" aria-label="Views">
+    <button type="button" id="vToday" class="on" aria-pressed="true">Today</button>
+    <button type="button" id="vLog" aria-pressed="false">Log</button>
+  </nav>
+
+  <div id="todayView">
+    <section class="daybar" aria-label="Day">
+      <div class="date">
+        <button type="button" id="prev" aria-label="Previous day">&lsaquo;</button>
+        <input type="date" id="day" aria-label="Date">
+        <button type="button" id="next" aria-label="Next day">&rsaquo;</button>
+        <button type="button" id="today" class="quiet">Today</button>
+      </div>
+      <div class="stats"><div><b id="sPhotos">0</b>photos</div></div>
+    </section>
+    <main class="grid" id="grid"></main>
+  </div>
+
+  <section id="logView" hidden aria-label="Log">
+    <div class="chips" id="chips" role="group" aria-label="Filter by meal"></div>
+    <div id="logList"></div>
+  </section>
+
+  <footer>Your entries and photos stay in this browser on this device. Photos are resized to save space.</footer>
+</div>
+
+<input type="file" id="fileUp" accept="image/*" multiple hidden>
+<input type="file" id="fileCam" accept="image/*" capture="environment" hidden>
+
+<dialog id="camDlg" aria-label="Take photos">
+  <video id="camVid" autoplay playsinline muted></video>
+  <p class="cammsg" id="camMsg"></p>
+  <div class="btns">
+    <button type="button" id="camCancel" class="quiet">Done</button>
+    <button type="button" id="camSnap" class="primary">Take photo</button>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
